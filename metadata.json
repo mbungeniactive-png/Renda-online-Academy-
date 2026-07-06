@@ -1,0 +1,6 @@
+{
+  "name": "Renda Online Academy",
+  "description": "Plataforma de ensino profissional para aprender a ganhar dinheiro na internet do zero ao avançado com trilhas de aprendizado, artigos completos e calculadora de renda.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
