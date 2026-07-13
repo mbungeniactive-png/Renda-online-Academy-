@@ -21,6 +21,7 @@ import {
 import { BLOG_POSTS } from "../data";
 import { BlogPost } from "../types";
 import PremiumPromoUnit from "./PremiumPromoUnit";
+import AdsterraSkyscraper from "./AdsterraSkyscraper";
 
 export interface BlogProps {
   selectedSlug?: string;
@@ -310,6 +311,11 @@ export default function Blog({
               <div className="grid grid-cols-1 gap-6 sticky top-28">
                 
                 <PremiumPromoUnit />
+
+                {/* ADSTERRA SKYSCRAPER BANNER */}
+                <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex justify-center">
+                  <AdsterraSkyscraper />
+                </div>
 
                 {/* RELATED SIDE RECOMMENDATION CARDS */}
                 <div className="bg-white border border-slate-200 p-4 rounded-xl space-y-4 shadow-sm">

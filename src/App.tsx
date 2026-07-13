@@ -15,6 +15,7 @@ import AboutContact from "./components/AboutContact";
 import Legal from "./components/Legal";
 import Settings from "./components/Settings";
 import CertificateUnit from "./components/CertificateUnit";
+import AdsterraSkyscraper from "./components/AdsterraSkyscraper";
 import { ACADEMY_MODULES } from "./data";
 import { MessageCircle, ArrowUp, Mail } from "lucide-react";
 
@@ -212,6 +213,14 @@ export default function App() {
       >
         <ArrowUp className="h-4 w-4" />
       </button>
+
+      {/* FIXED ADSTERRA SKYSCRAPER SIDES (Only visible on wide desktop layouts) */}
+      <div className="hidden 2xl:block fixed left-4 top-36 z-30">
+        <AdsterraSkyscraper />
+      </div>
+      <div className="hidden 2xl:block fixed right-4 top-36 z-30">
+        <AdsterraSkyscraper />
+      </div>
 
       {/* GLOBAL FOOTER COMPONENT */}
       <Footer setRoute={(newRoute) => {
