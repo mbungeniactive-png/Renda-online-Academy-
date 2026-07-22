@@ -12,7 +12,8 @@ import {
   BookOpen, 
   Award, 
   Lightbulb, 
-  CheckCircle2 
+  CheckCircle2,
+  MoreHorizontal
 } from "lucide-react";
 import { BLOG_POSTS, ACADEMY_MODULES } from "../data";
 
@@ -87,11 +88,40 @@ export default function Header({
     { id: "trilha", label: "Trilhas de Aprendizado" },
     { id: "tiktok-playbook", label: "Manual TikTok" },
     { id: "blog", label: "Artigos" },
+    { id: "algoritmo-tiktok", label: "Algoritmo do TikTok" },
     { id: "calculadora", label: "Calculadora" },
     { id: "certificado", label: "Certificado 🎓" },
     { id: "sobre-contato", label: "Quem Somos / Contato" },
     { id: "configuracoes", label: "Configurações" }
   ];
+
+  const mainNavItems = [
+    { id: "home", label: "Início" },
+    { id: "trilha", label: "Trilhas de Aprendizado" },
+    { id: "tiktok-playbook", label: "Manual TikTok" },
+    { id: "blog", label: "Artigos" }
+  ];
+
+  const moreNavItems = [
+    { id: "algoritmo-tiktok", label: "Algoritmo do TikTok ⚙️" },
+    { id: "calculadora", label: "Calculadora" },
+    { id: "certificado", label: "Certificado 🎓" },
+    { id: "sobre-contato", label: "Quem Somos / Contato" },
+    { id: "configuracoes", label: "Configurações" }
+  ];
+
+  const moreRef = useRef<HTMLDivElement>(null);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+        setShowMoreMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSuggestionClick = (type: "blog" | "lesson", idOrSlug: string, moduleId?: number) => {
     setSearchQuery("");
@@ -124,14 +154,17 @@ export default function Header({
           </div>
 
           {/* DESKTOP NAVIGATION */}
-          <nav className="hidden lg:flex space-x-1">
-            {navItems.map((item) => {
-              const isActive = currentRoute === item.id || (item.id === "sobre-contato" && (currentRoute === "sobre" || currentRoute === "contato"));
+          <nav className="hidden lg:flex items-center space-x-1">
+            {mainNavItems.map((item) => {
+              const isActive = currentRoute === item.id;
               return (
                 <button
                   key={item.id}
                   id={`nav-${item.id}`}
-                  onClick={() => setRoute(item.id)}
+                  onClick={() => {
+                    setRoute(item.id);
+                    setShowMoreMenu(false);
+                  }}
                   className={`px-3.5 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                     isActive 
                       ? "text-brand-green border-b-2 border-brand-green font-bold bg-white/5" 
@@ -142,6 +175,50 @@ export default function Header({
                 </button>
               );
             })}
+
+            {/* THREE DOTS DROPDOWN */}
+            <div ref={moreRef} className="relative">
+              <button
+                onClick={() => setShowMoreMenu(!showMoreMenu)}
+                className={`p-2.5 rounded hover:bg-white/5 text-white/85 hover:text-brand-green transition-all duration-200 cursor-pointer flex items-center justify-center ${
+                  moreNavItems.some(item => currentRoute === item.id || (item.id === "sobre-contato" && (currentRoute === "sobre" || currentRoute === "contato")))
+                    ? "text-brand-green border-b-2 border-brand-green font-bold bg-white/5 font-bold"
+                    : ""
+                }`}
+                title="Mais Recursos"
+                id="more-menu-button"
+              >
+                <MoreHorizontal className="h-5 w-5" />
+              </button>
+
+              {showMoreMenu && (
+                <div className="absolute right-0 mt-2 w-56 bg-brand-navy border border-indigo-950 rounded-xl shadow-2xl overflow-hidden z-50 text-white divide-y divide-indigo-950/50">
+                  <div className="py-1">
+                    {moreNavItems.map((item) => {
+                      const isActive = currentRoute === item.id || (item.id === "sobre-contato" && (currentRoute === "sobre" || currentRoute === "contato"));
+                      return (
+                        <button
+                          key={item.id}
+                          id={`nav-${item.id}`}
+                          onClick={() => {
+                            setRoute(item.id);
+                            setShowMoreMenu(false);
+                          }}
+                          className={`w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all duration-150 flex items-center justify-between cursor-pointer ${
+                            isActive
+                              ? "text-brand-green bg-white/10"
+                              : "text-white/85 hover:text-brand-green hover:bg-white/5"
+                          }`}
+                        >
+                          <span>{item.label}</span>
+                          {isActive && <div className="w-1.5 h-1.5 rounded-full bg-brand-green" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* INTERNAL SEARCH BAR */}

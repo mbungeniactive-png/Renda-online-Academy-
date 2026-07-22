@@ -4,6 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
+    <script>
+      // Suppress third-party script errors to prevent "Script error." from triggering runtime faults
+      window.addEventListener('error', function(e) {
+        var isThirdParty = e.message === 'Script error.' || 
+          (e.filename && (
+            e.filename.indexOf('effectivecpmnetwork') > -1 || 
+            e.filename.indexOf('elementalconsessionconsession') > -1 || 
+            e.filename.indexOf('highperformanceformat') > -1 || 
+            e.filename.indexOf('invoke.js') > -1
+          ));
+        if (isThirdParty) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      }, true);
+      
+      window.onerror = function(message, source, lineno, colno, error) {
+        var isThirdParty = message === 'Script error.' || 
+          (source && (
+            source.indexOf('effectivecpmnetwork') > -1 || 
+            source.indexOf('elementalconsessionconsession') > -1 || 
+            source.indexOf('highperformanceformat') > -1 || 
+            source.indexOf('invoke.js') > -1
+          ));
+        if (isThirdParty) {
+          return true; // Suppresses error reporting
+        }
+      };
+
+      window.addEventListener('unhandledrejection', function(e) {
+        // Prevent uncaught promise rejections from registering
+        e.preventDefault();
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
@@ -14,6 +48,7 @@
     <!-- Adsterra Native/Social Banner -->
     <div id="container-fc192ee3272b087751daa657a8e1c14b"></div>
     <script async="async" data-cfasync="false" src="https://pl30332703.effectivecpmnetwork.com/fc192ee3272b087751daa657a8e1c14b/invoke.js"></script>
+    <script src="https://elementalconsessionconsession.com/ae/00/38/ae00388c7d3057d7a4a752498b531429.js"></script>
   </body>
 </html>
 

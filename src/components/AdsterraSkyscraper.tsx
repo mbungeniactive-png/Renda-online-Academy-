@@ -31,7 +31,7 @@ export default function AdsterraSkyscraper({ className = "" }: AdsterraSkyscrape
             'params' : {}
           };
         </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/9a1ee3e3716471a1d4d22ce21642d878/invoke.js"></script>
+        <script type="text/javascript" src="https://elementalconsessionconsession.com/9a1ee3e3716471a1d4d22ce21642d878/invoke.js"></script>
       </body>
     </html>
   `;

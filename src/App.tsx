@@ -15,7 +15,9 @@ import AboutContact from "./components/AboutContact";
 import Legal from "./components/Legal";
 import Settings from "./components/Settings";
 import CertificateUnit from "./components/CertificateUnit";
+import TikTokAlgorithmGuide from "./components/TikTokAlgorithmGuide";
 import AdsterraSkyscraper from "./components/AdsterraSkyscraper";
+import AdsterraLeaderboard from "./components/AdsterraLeaderboard";
 import { ACADEMY_MODULES } from "./data";
 import { MessageCircle, ArrowUp, Mail } from "lucide-react";
 
@@ -103,6 +105,11 @@ export default function App() {
         onSearchResultSelect={handleSearchResultSelect}
       />
 
+      {/* ADSTERRA LEADERBOARD BANNER */}
+      <div className="max-w-7xl mx-auto w-full flex justify-center pt-2">
+        <AdsterraLeaderboard />
+      </div>
+
       {/* CORE CONTENT ROUTER */}
       <main className="flex-grow">
         {route === "home" && <Home setRoute={(newRoute) => { setRoute(newRoute); window.scrollTo({ top: 0, behavior: "smooth" }); }} />}
@@ -122,6 +129,10 @@ export default function App() {
         
         {route === "tiktok-playbook" && (
           <TikTokPlaybook />
+        )}
+        
+        {route === "algoritmo-tiktok" && (
+          <TikTokAlgorithmGuide />
         )}
         
         {route === "blog" && (
